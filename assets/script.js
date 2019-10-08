@@ -1,5 +1,4 @@
 //firebase key
-
   var firebaseConfig = {
     apiKey: "AIzaSyAMmGp85nG66iPIJ8cJ3f4yykDr_tcov9M",
     authDomain: "train-schedule-161a2.firebaseapp.com",
@@ -10,34 +9,31 @@
     appId: "1:1041586328598:web:2cfa5c583a89735ffdd137"
   };
  
+  //initialize firebase
   firebase.initializeApp(firebaseConfig);
-
 
 //create a variable to reference the database
 var database = firebase.database();
-
-
-
 
 //on click function for the submit button
 $(".btn-submit").on("click", function (event) {
     event.preventDefault();
 
-    var name = $("#employeeName").val().trim();
-    var role = $("#role").val().trim();
-    var startDate = $("#startDate").val().trim();
-    var rate = $("#monthlyRate").val().trim();
+    var train = $("#trainName").val().trim();
+    var destination = $("#destination").val().trim();
+    var time = $("#trainTime").val().trim();
+    var freq = $("#frequency").val().trim();
 
-    console.log(name);
-    console.log(role);
-    console.log(startDate);
-    console.log(rate);
+    console.log(train);
+    console.log(destination);
+    console.log(time);
+    console.log(freq);
 
     database.ref().push({
-        name : name,
-        role : role,
-        startDate : startDate,
-        rate : rate
+        train : train,
+        destination : destination,
+        time : time,
+        freq : freq
     })
     //don't refresh the page
     return false;
@@ -47,12 +43,12 @@ $(".btn-submit").on("click", function (event) {
 //firebase watcher and initial loader. HINT: this code behaves similarly to .on("value")
 database.ref().on("child_added", function(childSnapshot){
     //log everything coming out of snapshot
-    console.log(childSnapshot.val().name);
-    console.log(childSnapshot.val().role);
-    console.log(childSnapshot.val().startDate);
-    console.log(childSnapshot.val().rate);
+    console.log(childSnapshot.val().train);
+    console.log(childSnapshot.val().destination);
+    console.log(childSnapshot.val().time);
+    console.log(childSnapshot.val().freq);
 
-    $("tbody").append("<tr><td>" + childSnapshot.val().name + "</td><td>" + childSnapshot.val().role + "</td><td>" + childSnapshot.val().startDate + "</td><td>months worked function</td><td>" + childSnapshot.val().rate + "</td><td>total billed function</td></tr>");
+    $("tbody").append("<tr><td>" + childSnapshot.val().train + "</td><td>" + childSnapshot.val().destination + "</td><td>" + childSnapshot.val().time + "</td><td>Time to Destination</td><td>" + childSnapshot.val().freq + "</td><td>Total Frequency</td></tr>");
 }, function(errorObject){
     console.log("Errors handled: " + errorObject.code);
 });
