@@ -1,16 +1,17 @@
 //firebase key
-var firebaseConfig = {
-    apiKey: "AIzaSyDw3OVAFkFeAZdJHWoeQPkO0qlIp2aBI9c",
-    authDomain: "example-timesheet.firebaseapp.com",
-    databaseURL: "https://example-timesheet.firebaseio.com",
-    projectId: "example-timesheet",
+
+  var firebaseConfig = {
+    apiKey: "AIzaSyAMmGp85nG66iPIJ8cJ3f4yykDr_tcov9M",
+    authDomain: "train-schedule-161a2.firebaseapp.com",
+    databaseURL: "https://train-schedule-161a2.firebaseio.com",
+    projectId: "train-schedule-161a2",
     storageBucket: "",
-    messagingSenderId: "454663895635",
-    appId: "1:454663895635:web:87919e67fd5b45006c64a6",
-    measurementId: "G-M138LH4D54"
+    messagingSenderId: "1041586328598",
+    appId: "1:1041586328598:web:2cfa5c583a89735ffdd137"
   };
-  // Initialize Firebase
+ 
   firebase.initializeApp(firebaseConfig);
+
 
 //create a variable to reference the database
 var database = firebase.database();
