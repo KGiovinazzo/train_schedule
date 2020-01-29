@@ -48,18 +48,23 @@ database.ref().on("child_added", function (childSnapshot) {
   console.log(childSnapshot.val().time);
   console.log(childSnapshot.val().freq);
 
+  var frequency = childSnapshot.val().freq;
+
     var childStartTime = childSnapshot.val().time;
     var startTime = moment(childStartTime, "hh:mm").subtract(1, "years");
     console.log(startTime);
-  
-    var startTimeConverted = moment(childSnapshot.val().startTime, "hh:mm").subtract(1, "years");
-    var timeDiff = moment().diff(moment(startTimeConverted), "minutes");
-    var timeRemain = timeDiff % childSnapshot.val().frequency;
-    var minToArrival = childSnapshot.val().frequency - timeRemain;
+    var timeDiff = moment().diff(moment(startTime), "minutes");
+    var timeRemain = timeDiff % frequency;
+    var minToArrival = frequency - timeRemain;
     var nextTrain = moment().add(minToArrival, "minutes");
-    var key = childSnapshot.key;
+    nextTrain = moment(nextTrain).format("hh:mm");
+    var minAway = frequency - timeRemain;
 
-    $("tbody").append("<tr><td>" + childSnapshot.val().train + "</td><td>" + childSnapshot.val().destination + "</td><td>" + childSnapshot.val().freq + "</td><td>" + childSnapshot.val().time + "</td><td>" + nextTrain + "</td><td></td></tr>");
+    console.log(timeDiff);
+    console.log(frequency);
+    console.log(timeRemain);
+
+    $("tbody").append("<tr><td>" + childSnapshot.val().train + "</td><td>" + childSnapshot.val().destination + "</td><td>" + childSnapshot.val().freq + "</td><td>" + nextTrain + "</td><td>" +  minAway + "</td><td></td></tr>");
   }, function (errorObject) {
     console.log("Errors handled: " + errorObject.code);
   });
